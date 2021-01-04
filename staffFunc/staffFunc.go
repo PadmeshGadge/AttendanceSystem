@@ -16,8 +16,8 @@ func Open(subject string){
 			case 1:lecture.Check_lec(subject)
 			case 2:lecture.Check_attn(subject)
 			case 3:student.Addstudent()
-			case 4:student.Removestudent()
-			case 5:student.EditStudent()
+			case 4:fmt.Println("Remove")
+			case 5:fmt.Println("Edit")
 			default :i++
 		}
 	}

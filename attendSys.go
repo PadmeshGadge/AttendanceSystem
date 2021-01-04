@@ -1,7 +1,6 @@
 package main
 import(
 	"fmt"
-	"attendSys/admin"
 	"attendSys/staff"
 )
 func main(){
@@ -11,7 +10,7 @@ func main(){
 		fmt.Println("\nSelect Login Type\n1.Admin\n2.Staff\n3.Exit\n")
 		fmt.Scanln(&n)
 		switch(n){
-			case 1:admin.Login()
+			case 1:fmt.Println("Admin")
 			case 2:staff.Login()
 			case 3:i++
 			default:i++

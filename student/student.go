@@ -51,17 +51,6 @@ func Addstudent(){
 	if err!=nil{throwError(err)}
 	fmt.Println("STUDENT ADDED\n")
 }
-func Removestudent(){
-	var roll_no int
-	fmt.Print("Enter roll no of student to be removed: ")
-	fmt.Scanln(&roll_no)
-	db,err := sql.Open("mysql","root:@tcp(127.0.0.1:3306)/test")
-	if err!=nil{throwError(err)}
-	defer db.Close()
-	_,err = db.Query("DELETE FROM student_tbl WHERE roll_no=?",roll_no)
-	if err!=nil{throwError(err)}
-	fmt.Println("Student with roll no",roll_no,"removed")
-}
 func ViewStudent(){
 	db,err := sql.Open("mysql","root:@tcp(127.0.0.1:3306)/test")
 	if err!=nil{throwError(err)}
@@ -80,36 +69,6 @@ func ViewStudent(){
 		fmt.Printf("\n%v\t%v\t%v\t\t%v\n",arr[i].Roll_no,arr[i].Name,arr[i].Gender,arr[i].Email)
 	}
 	results.Close()
-}
-func EditStudent(){
-	ViewStudent()
-	db,err := sql.Open("mysql","root:@tcp(127.0.0.1:3306)/test")
-	if err!=nil{throwError(err)}
-	defer db.Close()
-	var roll,n int
-	fmt.Print("\nEnter roll no to update: ")
-	fmt.Scanln(&roll)
-	fmt.Println("\n1.Update Name\t2.Update Email")
-	fmt.Scanln(&n)
-	switch(n){
-		case 1:{
-			var str string
-			fmt.Print("\nEnter new name: ")
-			fmt.Scanln(&str)
-			_,err := db.Query("UPDATE student_tbl SET Name=? WHERE roll_no=?",str,roll)
-			if err!=nil{throwError(err)}
-		}
-		case 2:{
-			var str string
-			fmt.Print("\nEnter new email: ")
-			fmt.Scanln(&str)
-			_,err := db.Query("UPDATE student_tbl SET Email=? WHERE roll_no=?",str,roll)
-			if err!=nil{throwError(err)}
-		}
-	}
-	fmt.Println("Record updated successfully")
-	time.Sleep(1*time.Second)
-	ViewStudent()
 }
 func throwError(err error){
 	fmt.Println("Database error")
